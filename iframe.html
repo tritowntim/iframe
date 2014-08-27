@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+  <body>
+    <p>iframe.html</p>
+    <a href="#" id="go" onclick="postMessage();">go</go>
+    <script>
+      function postMessage() {
+        window.parent.postMessage({}, "*");
+      }
+    </script>
+  </body>
+</html>
