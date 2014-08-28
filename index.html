@@ -7,8 +7,8 @@
         window.console && console.log(text);
       }
 
-      function goToEdm(event) {
-        log('goToEdm');
+      function gotToPage(event) {
+        log('gotToPage');
         var action, url, origin, source;
         console.log(event.data);
         action = event.data;
@@ -31,9 +31,9 @@
 
       function setupEventListeners() {
         if (window.addEventListener) {
-          window.addEventListener('message', goToEdm, false);
+          window.addEventListener('message', gotToPage, false);
         } else if (window.attachEvent) {
-          window.attachEvent('onmessage', goToEdm);
+          window.attachEvent('onmessage', gotToPage);
         }
       }
 
