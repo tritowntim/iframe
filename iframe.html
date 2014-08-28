@@ -1,11 +1,14 @@
 <!DOCTYPE html>
   <body>
     <p>iframe.html</p>
-    <a href="#" id="go" onclick="postMessage();">go</go>
+    <a href="#"onclick="postMessage('edm');">edm</a>
+    <br>
+    <a href="#"onclick="postMessage('ga');">ga</a>
     <script>
-      function postMessage() {
-        window.parent.postMessage({}, "*");
+      function postMessage(action) {
+        // IE8 cannot handle object as message payload (?)
+        window.parent.postMessage(action, document.referrer);
       }
     </script>
   </body>
-</html>
+</html> 

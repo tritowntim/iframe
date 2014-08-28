@@ -3,18 +3,41 @@
     <p>index.html</p>
     <script>
 
-      window.console && console.log('main page (index.html)');
-
-      function goToEdm() {
-        window.console && console.log('goToEdm');
-        window.location = 'http://edm.generalassemb.ly';
+      function log(text) {
+        window.console && console.log(text);
       }
 
-      if (window.addEventListener) {
+      function goToEdm(event) {
+        log('goToEdm');
+        var action, url, origin, source;
+        console.log(event.data);
+        action = event.data;
+        origin = event.origin;
+        source = event.source;
+        log('action = ' + action + ', origin = ' + origin);
+
+        if (origin !== 'http://localhost:8080' && origin !== 'http://10.0.2.2:8080') {
+          log('unauthorized message origin = ' + origin);
+          return;
+        }
+
+        if (action === 'ga') {
+          url = 'http://ga.co';
+        } else if (action == 'edm') {
+          url = 'http://edm.generalassemb.ly';
+        }
+        window.location = url;
+      }
+
+      function setupEventListeners() {
+        if (window.addEventListener) {
           window.addEventListener('message', goToEdm, false);
-      } else if (window.attachEvent) {
+        } else if (window.attachEvent) {
           window.attachEvent('onmessage', goToEdm);
+        }
       }
+
+      setupEventListeners();
 
     </script>
     <iframe src="iframe.html"></iframe>
